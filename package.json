@@ -1,0 +1,52 @@
+{
+  "name": "drinkwater-extension",
+  "displayName": "Drink Water Pop-Up \ud83d\udc69\ud83c\udffb\u200d\ud83d\udcbb\ud83d\udca7",
+  "description": "remind you to drink water for 20 minutes every coding",
+  "version": "0.0.5",
+  "publisher": "MatrixSync",
+  "icon": "media/drinkwater.png",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:drinkwater-extension.start"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "drinkwater-extension.start",
+        "title": "Drink Water by Matrix Sync"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "drinkwater-extension.start",
+        "key": "ctrl+shift+h",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "drinkwater-extension.start",
+        "mac": "cmd+shift+h",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "eslint": "^9.25.1",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
