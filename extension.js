@@ -8,12 +8,13 @@ function activate(context) {
     const showReminder = () => {
       const panel = vscode.window.createWebviewPanel(
         'drinkReminder',
-        '💧 Waktunya Minum!',
+        '💧🍶 Time To Drink!',
         vscode.ViewColumn.One,
         {
           enableScripts: true,
           localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'media'))]
         }
+        
       );
 
       const logoPath = panel.webview.asWebviewUri(
@@ -28,7 +29,7 @@ function activate(context) {
         <html>
         <body style="text-align:center; font-family:sans-serif; padding-top: 20px;">
           <img src="${logoPath}" width="100" height="100" />
-          <h2>💧 Udah minum air belum?</h2>
+          <h2>💧🍶 Udah minum air belum?</h2>
           <button onclick="sendMessage()" style="font-size:16px;padding:10px 20px;">✅ Udah Minum</button>
           <audio autoplay>
             <source src="${alarmPath}" type="audio/mpeg" />
@@ -60,7 +61,7 @@ function activate(context) {
     vscode.window.showInformationMessage(`💧 Reminder aktif setiap ${minutes} menit.`);
   };
 
-  const disposable = vscode.commands.registerCommand('drink-water-reminder.start', async () => {
+  const disposable = vscode.commands.registerCommand('drinkwater-reminder.start', async () => {
     const input = await vscode.window.showInputBox({
       prompt: 'Masukkan interval waktu (menit)',
       placeHolder: 'Contoh: 20',
@@ -69,6 +70,8 @@ function activate(context) {
         return isNaN(num) || num <= 0 ? 'Harus angka lebih dari 0' : null;
       }
     });
+
+    if (!input) return;
 
     const minutes = parseInt(input);
     if (!isNaN(minutes) && minutes > 0) {
@@ -79,15 +82,17 @@ function activate(context) {
 
   context.subscriptions.push(disposable);
 
-  // Create status bar item
   const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-  statusBarItem.command = 'drinkwater-extension.start';
-  statusBarItem.text = '💧 Hydrate';
+  statusBarItem.command = 'drinkwater-reminder.start';
+  statusBarItem.text = '🍶 Drink Water!';
   statusBarItem.tooltip = 'Start Drink Water Reminder';
   statusBarItem.show();
   context.subscriptions.push(statusBarItem);
 
-  vscode.commands.executeCommand('drinkwater-extension.start');
+  // Biar auto jalan waktu startup
+  setTimeout(() => {
+    vscode.commands.executeCommand('drinkwater-reminder.start');
+  }, 1000);
 }
 
 function deactivate() {
