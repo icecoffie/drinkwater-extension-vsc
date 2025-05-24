@@ -1,8 +1,8 @@
 {
   "name": "drinkwater-extension",
-  "displayName": "Drink Water Pop-Up \ud83d\udc69\ud83c\udffb\u200d\ud83d\udcbb\ud83d\udca7",
+  "displayName": "Drink Water Pop-Up 💧",
   "description": "remind you to drink water for 20 minutes every coding",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "MatrixSync",
   "icon": "media/drinkwater.png",
   "engines": {
@@ -13,24 +13,24 @@
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onCommand:drinkwater-extension.start"
+    "onCommand:drinkwater-reminder.start"
   ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "drinkwater-extension.start",
+        "command": "drinkwater-reminder.start",
         "title": "Drink Water by Matrix Sync"
       }
     ],
     "keybindings": [
       {
-        "command": "drinkwater-extension.start",
+        "command": "drinkwater-reminder.start",
         "key": "ctrl+shift+h",
         "when": "editorTextFocus"
       },
       {
-        "command": "drinkwater-extension.start",
+        "command": "drinkwater-reminder.start",
         "mac": "cmd+shift+h",
         "when": "editorTextFocus"
       }
